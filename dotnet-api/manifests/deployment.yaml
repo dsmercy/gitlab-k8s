@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: $APPLICATION_NAME
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: $APPLICATION_NAME
+  template:
+    metadata:
+      labels:
+        app: $APPLICATION_NAME
+    spec:
+      containers:
+        - name: $APPLICATION_NAME
+          image: $CONTAINER_REGISTRY_IMAGE
+          ports:
+            - containerPort: 5000
+          env:
+            - name: MY_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: $SECRETS_FILE
+                  key: MY_CONNECTION_STRING
+            - name: DASHBOARD_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: $SECRETS_FILE
+                  key: DASHBOARD_NAME

@@ -1,0 +1,4 @@
+ci_access:
+  projects:
+  - id: learning2770602/dotnet-api
+  - id: learning2770602/react-app
